@@ -1,5 +1,4 @@
 ***Nebula***
-**(formaly aurora)**
 
 a API readme with examples and a basic diagram is available under the docs folder.
 
