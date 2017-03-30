@@ -17,7 +17,7 @@
 17. add backup documents
 18. auto update newer versions of worker-manager?
 19. set the api manager status page to work without basic auth
-20. multiple users + permissions (read\write per app + admin permissions)
+20. multiple users + permissions (read\write per app + admin permissions) - kong is a current workaround
 21. walkthrough tutorial of setting everything up + examples
 22. a real documentation rather then just a readme and an api functions list
 23. ability to PUT just a single part of an app while keeping the rest rather then having to POST everything from scratch
@@ -25,6 +25,5 @@
 25. have all configs be also possible to set using envvars
 26. a CLI
 27. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
-28. add changing ulimit settings for container support
-29. refactor to the newest version of docker-py (new syntax so require full refactor)
-30. docker hub base images for the api-manager and worker-manager
+28. refactor to the newest version of docker-py (new syntax so require full refactor)
+29. docker hub base images for the api-manager and worker-manager
