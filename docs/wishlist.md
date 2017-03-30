@@ -26,4 +26,3 @@
 26. a CLI
 27. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
 28. refactor to the newest version of docker-py (new syntax so require full refactor)
-29. docker hub base images for the api-manager and worker-manager
