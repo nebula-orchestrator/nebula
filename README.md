@@ -22,10 +22,10 @@ as each worker server is in charge only of it's own containers all pulls from ra
 the basic steps to getting aurora to work is:
 1. create mongo, preferably a cluster & even a sharded cluster for large enough cluster
 2. create RabbitMQ, preferably a cluster with HA queues between them or even federated nodes for a large enough cluster
-3. create api servers and have them run the api-manager container, make sure to change the conf.json to your cluster params, make sure to open the api-monitor ports on everything along the way, must have the docker socket bound for the container to work, preferably 2 at least load balanced between them for example:
- `/usr/bin/docker run -d -p 80:80 --restart=always --name nebula-api-manager registry.vidazoo.com:5000/nebula-api-manager`
-4. create the worker server and have them run the worker-manager container, make sure to change the conf.json to your cluster params,  the container needs to run with an APP_NAME envvvar:
- `/usr/bin/docker run -d --restart=always -e APP_NAME="example-app" --name nebula-worker-manager -v /var/run/docker.sock:/var/run/docker.sock registry.vidazoo.com:5000/nebula-worker-manager`
+3. create api servers and have them run the api-manager container, make sure to change the conf.json to your cluster params before building it, make sure to open the api-monitor ports on everything along the way, must have the docker socket bound for the container to work, preferably 2 at least load balanced between them for example:
+ `/usr/bin/docker run -d -p 80:80 --restart=always --name nebula-api-manager <your_api_manager_container>`
+4. create the worker server and have them run the worker-manager container, make sure to change the conf.json to your cluster params before building it,  the container needs to run with an APP_NAME envvvar:
+ `/usr/bin/docker run -d --restart=always -e APP_NAME="example-app" --name nebula-worker-manager -v /var/run/docker.sock:/var/run/docker.sock <your_worker_manager_container>`
 5. create the haproxy\lb on each worker server, containerized or not (possibly not needed for services not accepting outside requests or for small scale where just the outside LB will do).
 6. create either an external LB\ELB to route traffic between the worker servers or route53\DNS LB between the servers.
 7. create the app using the nebula API using the same APP_name as the one you passed to the worker-manager
