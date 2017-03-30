@@ -6,6 +6,6 @@
   "rabbit_user": "nebula_rabbit_user",
   "rabbit_password": "nebula_rabbit_pass",
   "rabbit_vhost": "nebula_rabbit_vhost",
-  "mongo_url": "mongodb://<nebula_mongo_host>:27017/<mongo_schema>?ssl=true&replicaSet=<mongo_replica_set>&authSource=<mongo_auth_schema>",
+  "mongo_url": "mongodb://<mongo_user>:<mongo_password>@<nebula_mongo_host>:27017/<mongo_schema>?ssl=true&replicaSet=<mongo_replica_set>&authSource=<mongo_auth_schema>",
   "schema_name": "mongo_schema_name"
 }
