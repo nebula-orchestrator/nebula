@@ -12,10 +12,9 @@ allows to:
 5. change # of containers running per core
 6. change image used
 
-there are 3 custom created services:
+there are 2 custom created services:
 1. api manager - a REST API endpoint to control nebula
 2. worker manager - a container which listens to rabbit and manages the worker server it runs on, one has to run on each worker
-3. api monitor - a Sensu inspired component which report in detail the status of each app container  
 
 as each worker server is in charge only of it's own containers all pulls from rabbit and work happens on the same time on all servers so pushing 50 million containers on a million servers will take the same amount of time as pushing 50 containers on 1 server.
 
@@ -33,4 +32,3 @@ the basic steps to getting aurora to work is:
 7. create the haproxy\lb on each worker server, containerized or not (possibly not needed for services not accepting outside requests or for small scale where just the outside LB will do).
 8. create either an external LB\ELB to route traffic between the worker servers or route53\DNS LB between the servers.
 9. create the app using the nebula API using the same APP_name as the one you passed to the worker-manager
-10. (optional) create the api-monitor servers and run the api-monitor containers on them, make sure to first change the conf.json to your cluster params.
