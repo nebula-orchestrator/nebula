@@ -2,7 +2,7 @@
 
 a API readme with examples and a basic diagram is available under the docs folder inside the [github](https://github.com/naorlivne/nebula) repo.
 
-this repo is designed to store all code for our custom built massive scale container management system, this is achieved by following the linux method of doing one thing only, each component is designed to be able to scale out for as far as needed, only downside over standard container orchestrator is that this loads the same containers on the server, so this is more like a great CI\CD for docker.
+this repo is designed to store all code for our custom built massive scale container management system, this is achieved by following the linux method of doing one thing only, each component is designed to be able to scale out for as far as needed, only downside over standard container orchestrator is that this loads the same containers on the server, so it can also be viewed\usedgit  like a great CI\CD for docker.
 
 allows to:
 1. change ports
