@@ -20,7 +20,7 @@ as each worker server is in charge only of it's own containers all pulls from ra
 
 **installing**
 
-the basic steps to getting aurora to work is:
+the basic steps to getting Nebula to work is:
 1. create mongo, preferably a cluster & even a sharded cluster for large enough cluster
 2. create RabbitMQ, preferably a cluster with HA queues between them or even federated nodes for a large enough cluster
 3. create your copy of the api-manger docker image, a base image is available at [docker-hub](https://hub.docker.com/r/naorlivne/nebula/) with the "api-manager" tag (example: docker pull naorlivne/nebula:api-manager), either use it as a baseline FROM to create your own image or mount your own config file to replace the default one
