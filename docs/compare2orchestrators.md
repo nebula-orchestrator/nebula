@@ -19,3 +19,4 @@
 | Backend DB's | Mongo & RabbitMQ | zookeeper | etcd | internal in masters |
 | multiple apps share worker node | no | yes | yes | yes |
 | Changes processing time scalability | extremely short, each worker is unaffected from the rest | longish - must wait for an offer matching it requirements first which at complex clusters can take a bit | short - listens to EtcD for changes which is fast but the masters don't scale when the load does | longish - gossip protocol will get there in the end but might take the scenic route |
+| type of containers supported | docker with possible future extension | docker, mesos universal container | docker with possible future extension | docker only |
