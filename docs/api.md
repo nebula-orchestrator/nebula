@@ -1,5 +1,5 @@
-#get api status
-###request
+# get api status
+### request
 ```
 GET /api/status HTTP/1.1
 Host: localhost:5000
@@ -9,15 +9,15 @@ Cache-Control: no-cache
 Postman-Token: c3c35e8d-e242-b7ac-4b76-d7879be2398a
 ```
 
-###response example
+### response example
 success
 ```
 200
 { "api_avilable": "True" }
 ```
 
-#create app
-###request
+# create app
+### request
 ```
 POST /api/apps/test HTTP/1.1
 Host: localhost:5000
@@ -35,7 +35,7 @@ Postman-Token: 1c4b215b-7bb4-8045-4896-9c4d3ac3c2de
 }
 ```
 
-###response example
+### response example
 success
 ```
 202
@@ -69,8 +69,8 @@ app already exists
 
 ```
 
-#delete app
-###request
+# delete app
+### request
 ```
 DELETE /api/apps/test HTTP/1.1
 Host: localhost:5000
@@ -80,7 +80,7 @@ Cache-Control: no-cache
 Postman-Token: 40e88690-33da-de0a-2a1c-1b01459bab8e
 ```
 
-###response example
+### response example
 success:
 ```
 202
@@ -95,8 +95,8 @@ when trying to delete a non existing app:
 }
 ```
 
-#list apps
-###request
+# list apps
+### request
 ```
 GET /api/apps HTTP/1.1
 Host: nebula-api-01.private02.aws.vidazoo.com
@@ -106,7 +106,7 @@ Cache-Control: no-cache
 Postman-Token: 9ed33e7a-ade5-8512-2faf-e8697d855af8
 ```
 
-###response example
+### response example
 ```
 200
  {
@@ -116,8 +116,8 @@ Postman-Token: 9ed33e7a-ade5-8512-2faf-e8697d855af8
 }
 ```
 
-#get app config
-###request
+# get app config
+### request
 ```
 GET /api/apps/test HTTP/1.1
 Host: localhost:5000
@@ -127,7 +127,7 @@ Cache-Control: no-cache
 Postman-Token: d67e1044-561e-cf39-a59a-93101102231e
 ```
 
-###response example
+### response example
 ```
 200
 {
@@ -150,8 +150,8 @@ Postman-Token: d67e1044-561e-cf39-a59a-93101102231e
 }
 ```
 
-#stop app
-###request
+# stop app
+### request
 ```
 POST /api/apps/test/stop HTTP/1.1
 Host: localhost:5000
@@ -161,7 +161,7 @@ Cache-Control: no-cache
 Postman-Token: 393100e2-fb29-3b02-fb66-b77388f810b1
 ```
 
-###response example
+### response example
 ```
 202
 {
@@ -185,8 +185,8 @@ Postman-Token: 393100e2-fb29-3b02-fb66-b77388f810b1
 } 
 ```
 
-#start app
-###request
+# start app
+### request
 ```
 POST /api/apps/test/start HTTP/1.1
 Host: localhost:5000
@@ -196,7 +196,7 @@ Cache-Control: no-cache
 Postman-Token: 8be83768-3921-f4cd-a6cb-b4fcda6b7e32
 ```
 
-###response example
+### response example
 ```
 202
  {
@@ -220,8 +220,8 @@ Postman-Token: 8be83768-3921-f4cd-a6cb-b4fcda6b7e32
 }
 ```
 
-#restart app
-###request
+# restart app
+### request
 ```
 POST /api/apps/test/restart HTTP/1.1
 Host: localhost:5000
@@ -231,7 +231,7 @@ Cache-Control: no-cache
 Postman-Token: fa2e1e6f-c0c9-0dc5-a323-00ed9503cf4e
 ```
 
-###response example
+### response example
 ```
 202
 {
@@ -255,8 +255,8 @@ Postman-Token: fa2e1e6f-c0c9-0dc5-a323-00ed9503cf4e
 }
 ```
 
-#update app
-###request
+# update app
+### request
 ```
 POST /api/apps/test/update HTTP/1.1
 Host: localhost:5000
