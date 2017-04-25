@@ -1,7 +1,8 @@
 |  | Nebula | Mesos+Marathon\DC/OS | Kubernetes | Swarm |
 |-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------|
 | Stateless masters | yes | yes | yes | no - data stored in local master raft consensus  |
-| Scale limit | tens of thousands  | tens of thousands | 1000-5000 depending on version | unknown |
+| worker nodes Scale limit | tens of thousands  | tens of thousands | 1000-5000 depending on version | unknown |
+| containers Scale limit | millions | millions | 120000 | unknown |
 | Health-check limits | unlimited - uses docker builtin health checks | depending on check type - https://mesosphere.com/blog/2017/01/05/introducing-mesos-native-health-checks-apache-mesos-part-1/ | unknown | unlimited - uses docker builtin health checks |
 | Multi region\DC workers | yes | possible but not recommended according to latest DC/OS docs | possible via multiple clusters controlled via an ubernetes cluster | yes |
 | Multi region\DC masters | yes - each master is only contacted when an API call is made | possible but extremely not recommended according to latest DC/OS docs | not possible - even with ubernetes each region masters only manage it's own regions | possible but not recommended do to raft consensus  |
