@@ -13,8 +13,8 @@ allows to:
 6. change image used
 
 there are 2 custom created services:
-1. api manager - a REST API endpoint to control nebula
-2. worker manager - a container which listens to rabbit and manages the worker server it runs on, one has to run on each worker
+1. api manager - a REST API endpoint to control nebula, fully stateless (all data stored in DB only).
+2. worker manager - a container which listens to rabbit and manages the worker server it runs on, one has to run on each worker, fully stateless.
 
 as each worker server is in charge only of it's own containers all pulls from rabbit and work happens on the same time on all servers so pushing 50 million containers on a million servers will take the same amount of time as pushing 50 containers on 1 server.
 
