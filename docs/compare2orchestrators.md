@@ -12,7 +12,7 @@
 | Simple worker scaling up & down | yes | yes | yes | partial - scaling down cleanly requires an api call rather then just shutting down the server like the rest |
 | CLI | WIP | yes | yes | yes |
 | GUI | WIP | yes | yes | no |
-| Load Balancing | yes- supports bringing your own HAProxy\Nginx\etc in a 2 step process (the first between instances & the 2nd between containers on that instance) | yes - HTTP only for outside connections - marathon-lb, supports bringing your own otherwise | yes | partial - auto routes inside the cluster but you still need to LB between cluster nodes from the outside  |
+| Load Balancing | yes- supports bringing your own HAProxy\Nginx\etc in a 2 step process (the first between instances & the 2nd between containers on that instance) | yes - HTTP only for outside connections - marathon-lb, supports bringing your own otherwise | yes | yes - auto routes inside the cluster but you still need to LB between cluster nodes from the outside  |
 | Simple masters scaling up & down | yes - master is fully stateless | no | no | partial - simple as long as quorum remains in the process |
 | Simple containers scaling up & down | yes - single api call and\or adding\removing worker nodes | yes - single api call | yes - single api call | yes - single api call |
 | Modular design (or plugin support) | yes - every parts does 1 thing only | yes - 2 step orchestrator | yes | yes |
