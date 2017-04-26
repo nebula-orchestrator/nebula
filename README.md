@@ -33,6 +33,10 @@ the basic steps to getting Nebula to work is:
 8. create either an external LB\ELB to route traffic between the worker servers or route53\DNS LB between the servers.
 9. create the app using the nebula API using the same APP_name as the one you passed to the worker-manager
 
+**configuring**
+
+configuring can be done either via envvars or via replacing the attached conf.json to one with your own variables, more info about possible config variables can be found at [docker-hub](https://github.com/naorlivne/nebula/blob/master/docs/config.md/
+
 **Repo folder structure**
 
 * api-manager - the api endpoint through which Nebula is controlled, includes api-manager Dockerfile & entire code structure
