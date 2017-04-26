@@ -8,30 +8,14 @@ from threading import Thread
 from random import randint
 
 
-# read config file at startup
-# load the login params from auth.json file
-print "reading conf.json file"
-auth_file = json.load(open("conf.json"))
-registry_auth_user = auth_file["registry_auth_user"]
-registry_auth_password = auth_file["registry_auth_password"]
-registry_host = auth_file["registry_host"]
-rabbit_host = auth_file["rabbit_host"]
-rabbit_vhost = auth_file["rabbit_vhost"]
-rabbit_port = auth_file["rabbit_port"]
-rabbit_user = auth_file["rabbit_user"]
-rabbit_password = auth_file["rabbit_password"]
-mongo_url = auth_file["mongo_url"]
-schema_name = auth_file["schema_name"]
-max_restart_wait_in_seconds = auth_file["max_restart_wait_in_seconds"]
+def get_conf_setting(setting, settings_json):
+    try:
+        setting_value = os.getenv(setting.upper(), settings_json[setting])
+        return setting_value
+    except:
+        print "missing " + setting + " config setting"
+        exit(2)
 
-# get the app name the worker manages
-app_name = os.environ["APP_NAME"]
-
-# get number of cpu cores on host
-cpu_cores = get_number_of_cpu_cores()
-
-# work against docker socket
-cli = Client(base_url='unix://var/run/docker.sock', version="auto")
 
 def split_container_name_version(image_name):
     try:
@@ -161,6 +145,30 @@ def rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_
             print "queue no longer exists - can't guarantee order so dropping container"
             exit(2)
         rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
+
+# read config file and config envvars at startup
+print "reading config variables"
+auth_file = json.load(open("conf.json"))
+registry_auth_user = get_conf_setting("registry_auth_user", auth_file)
+registry_auth_password = get_conf_setting("registry_auth_password", auth_file)
+registry_host = get_conf_setting("registry_host", auth_file)
+rabbit_host = get_conf_setting("rabbit_host", auth_file)
+rabbit_vhost = get_conf_setting("rabbit_vhost", auth_file)
+rabbit_port = int(get_conf_setting("rabbit_port", auth_file))
+rabbit_user = get_conf_setting("rabbit_user", auth_file)
+rabbit_password = get_conf_setting("rabbit_password", auth_file)
+mongo_url = get_conf_setting("mongo_url", auth_file)
+schema_name = get_conf_setting("schema_name", auth_file)
+max_restart_wait_in_seconds = int(get_conf_setting("max_restart_wait_in_seconds", auth_file))
+
+# get the app name the worker manages
+app_name = os.environ["APP_NAME"]
+
+# get number of cpu cores on host
+cpu_cores = get_number_of_cpu_cores()
+
+# work against docker socket
+cli = Client(base_url='unix://var/run/docker.sock', version="auto")
 
 
 # connect to rabbit and create queue first thing at startup

@@ -5,19 +5,14 @@ from functions.db_functions import *
 from functions.rabbit_functions import *
 from bson.json_util import dumps, loads
 
-# read config file at startup
-#load the login params from auth.json file
-print "reading conf.json file"
-auth_file = json.load(open("conf.json"))
-basic_auth_user = auth_file["basic_auth_user"]
-basic_auth_password = auth_file["basic_auth_password"]
-rabbit_host = auth_file["rabbit_host"]
-rabbit_vhost = auth_file["rabbit_vhost"]
-rabbit_port = auth_file["rabbit_port"]
-rabbit_user = auth_file["rabbit_user"]
-rabbit_password = auth_file["rabbit_password"]
-mongo_url = auth_file["mongo_url"]
-schema_name = auth_file["schema_name"]
+
+def get_conf_setting(setting, settings_json):
+    try:
+        setting_value = os.getenv(setting.upper(), settings_json[setting])
+        return setting_value
+    except:
+        print "missing " + setting + " config setting"
+        exit(2)
 
 
 # login to rabbit function
@@ -25,6 +20,22 @@ def rabbit_login():
     rabbit_connection = rabbit_connect(rabbit_user, rabbit_password, rabbit_host, rabbit_port, rabbit_vhost)
     rabbit_connection_channel = rabbit_create_channel(rabbit_connection)
     return rabbit_connection_channel
+
+
+# read config file at startup
+#load the login params from auth.json file
+print "reading conf.json file"
+auth_file = json.load(open("conf.json"))
+basic_auth_user = get_conf_setting("basic_auth_user", auth_file)
+basic_auth_password = get_conf_setting("basic_auth_password", auth_file)
+rabbit_host = get_conf_setting("rabbit_host", auth_file)
+rabbit_vhost = get_conf_setting("rabbit_vhost", auth_file)
+rabbit_port = int(get_conf_setting("rabbit_port", auth_file))
+rabbit_user = get_conf_setting("rabbit_user", auth_file)
+rabbit_password = get_conf_setting("rabbit_password", auth_file)
+mongo_url = get_conf_setting("mongo_url", auth_file)
+schema_name = get_conf_setting("schema_name", auth_file)
+
 
 # login to db at startup
 mongo_collection = mongo_connect(mongo_url, schema_name)

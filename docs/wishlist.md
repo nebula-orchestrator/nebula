@@ -22,9 +22,8 @@
 22. a real documentation rather then just a readme and an api functions list
 23. ability to PUT just a single part of an app while keeping the rest rather then having to POST everything from scratch
 24. registry auth from the usual docker config file as well as from optionally from nebula config
-25. have all configs be also possible to set using envvars
-26. a CLI
-27. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
-28. refactor to the newest version of docker-py (new syntax so require full refactor)
-29. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
-30. have the random wait time be on the app level rather then the cluster level
+25. a CLI
+26. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
+27. refactor to the newest version of docker-py (new syntax so require full refactor)
+28. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
+29. have the random wait time be on the app level rather then the cluster level
