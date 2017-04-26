@@ -35,7 +35,7 @@ the basic steps to getting Nebula to work is:
 
 **configuring**
 
-configuring can be done either via envvars or via replacing the attached conf.json to one with your own variables, more info about possible config variables can be found at [config.md](https://github.com/naorlivne/nebula/blob/master/docs/config.md/
+configuring can be done either via envvars or via replacing the attached conf.json to one with your own variables, more info about possible config variables can be found at [config.md](https://github.com/naorlivne/nebula/blob/master/docs/config.md/)
 
 **Repo folder structure**
 
