@@ -27,3 +27,4 @@
 27. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
 28. refactor to the newest version of docker-py (new syntax so require full refactor)
 29. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
+30. have the random wait time be on the app level rather then the cluster level
