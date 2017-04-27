@@ -17,7 +17,7 @@
 17. registry auth from the usual docker config file as well as from optionally from nebula config
 18. a CLI
 19. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
-20. refactor to the newest version of docker-py (new syntax so require full refactor) - use the change to unuglify everything now that the design is layed down and proven to work.
+20. refactor to the newest version of docker-py (new syntax so require full refactor) - use the change to unuglify everything now that the design is proven to work.
 21. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
 22. have the random wait time be on the app level rather then the cluster level
 23. a web interface
