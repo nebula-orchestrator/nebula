@@ -37,6 +37,10 @@ the basic steps to getting Nebula to work is:
 
 configuring can be done either via envvars or via replacing the attached conf.json to one with your own variables, more info about possible config variables can be found at [config.md](https://github.com/naorlivne/nebula/blob/master/docs/config.md/)
 
+**backup & restore**
+
+as the only stateful part of the entire design is the MongoDB backing up mongo using any of the best practice methods available to it, is sufficient, that being said it might be a good idea to also have your version of the api-manager & worker-manager containers available in more then one registry in case of issues with your chosen registry supplier (or self hosted one).
+
 **Repo folder structure**
 
 * api-manager - the api endpoint through which Nebula is controlled, includes api-manager Dockerfile & entire code structure
