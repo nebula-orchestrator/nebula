@@ -40,6 +40,7 @@ configuring can be done either via envvars or via replacing the attached conf.js
 **backup & restore**
 
 as the only stateful part of the entire design is the MongoDB backing up mongo using any of the best practice methods available to it, is sufficient, that being said it might be a good idea to also have your version of the api-manager & worker-manager containers available in more then one registry in case of issues with your chosen registry supplier (or self hosted one).
+restoring in case of a complete disaster is simply a matter of recreating all the components using the installing method described above and populating your MongoDB with the most recent backup of the mongo database.
 
 **Repo folder structure**
 
