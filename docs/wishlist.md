@@ -27,3 +27,4 @@
 27. refactor to the newest version of docker-py (new syntax so require full refactor)
 28. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
 29. have the random wait time be on the app level rather then the cluster level
+30. a web interface
