@@ -8,23 +8,19 @@
 8. add running containers as privileged option
 9. add the api monitor
 10. add option to set container run command 
-11. add install documents
-12. add architecture explanation documents
-13. add HA explanation documents
-14. add usage documents
-15. add ability to have starting port and containers external port range to be different then each other
-16. add ability to have containers per server set by memory or total per server as well as by # of cores
-17. add backup documents
-18. auto update newer versions of worker-manager?
-19. set the api manager status page to work without basic auth
-20. multiple users + permissions (read\write per app + admin permissions) - kong is a current workaround
-21. walkthrough tutorial of setting everything up + examples
-22. a real documentation rather then just a readme and an api functions list
-23. ability to PUT just a single part of an app while keeping the rest rather then having to POST everything from scratch
-24. registry auth from the usual docker config file as well as from optionally from nebula config
-25. a CLI
-26. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
-27. refactor to the newest version of docker-py (new syntax so require full refactor)
-28. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
-29. have the random wait time be on the app level rather then the cluster level
-30. a web interface
+11. add ability to have starting port and containers external port range to be different then each other
+12. add ability to have containers per server set by memory or total per server as well as by # of cores
+13. add backup documents
+14. auto update newer versions of worker-manager?
+15. set the api manager status page to work without basic auth
+16. multiple users + permissions (read\write per app + admin permissions) - kong is a current workaround
+17. walkthrough tutorial of setting everything up + examples
+18. a real documentation rather then just a readme and an api functions list
+19. ability to PUT just a single part of an app while keeping the rest rather then having to POST everything from scratch
+20. registry auth from the usual docker config file as well as from optionally from nebula config
+21. a CLI
+22. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model
+23. refactor to the newest version of docker-py (new syntax so require full refactor)
+24. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
+25. have the random wait time be on the app level rather then the cluster level
+36. a web interface
