@@ -29,7 +29,7 @@ the basic steps to getting Nebula to work is:
 5. create your copy of the worker-manger docker image, a base image is available at docker hub at [docker-hub](https://hub.docker.com/r/naorlivne/nebula/) with the "worker-manager" tag (example: `docker pull naorlivne/nebula:worker-manager`), either use it as a baseline FROM to create your own image or mount your own config file to replace the default one
 6. create the worker servers and have them run the worker-manager container, make sure to bind the docker socket & having the restart=always flag set is mandatory as nebula worker-manager relies on containers restarts to reconnect to rabbit in case of long durations of it being unable to connect to rabbit in order to ensure latest app config is set correctly, the container needs to run with an APP_NAME envvvar:
  `/usr/bin/docker run -d --restart=always -e APP_NAME="example-app" --name nebula-worker-manager -v /var/run/docker.sock:/var/run/docker.sock <your_worker_manager_container>`
-7. create the haproxy\lb on each worker server, containerized or not (possibly not needed for services not accepting outside requests or for small scale where just the outside LB will do).
+7. create the haproxy\lb on each worker server, containerized or not (possibly not needed for services not accepting outside requests or for small scale where just the outside LB will do), attached is an [example-config](https://github.com/naorlivne/nebula/blob/master/docs/haproxy.cfg).
 8. create either an external LB\ELB to route traffic between the worker servers or route53\DNS LB between the servers.
 9. create the app using the nebula API using the same APP_name as the one you passed to the worker-manager
 
