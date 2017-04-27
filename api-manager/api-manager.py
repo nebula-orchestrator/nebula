@@ -253,9 +253,6 @@ def apply_caching(response):
     return response
 
 
-# based on http://blog.luisrei.com/articles/flaskrest.html
-# and on http://stackoverflow.com/questions/22947905/flask-example-with-post
 # will usually run in gunicorn but for debugging set ENV envvar to dev to run from flask built in web server
-if os.environ.has_key("ENV") is True:
-    if os.environ["ENV"] == "dev":
-        app.run(host='0.0.0.0', threaded=True)
+if os.getenv("ENV", "prod") == "dev":
+    app.run(host='0.0.0.0', threaded=True)
