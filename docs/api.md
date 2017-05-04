@@ -156,6 +156,7 @@ Postman-Token: d67e1044-561e-cf39-a59a-93101102231e
 ```
 
 # stop app
+stop a running Nebula app
 ### request
 ```
 POST /api/apps/test/stop HTTP/1.1
