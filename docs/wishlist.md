@@ -1,5 +1,5 @@
 1. add configurable rolling restart for containers
-2. add multiple back-ends rather then just mongodb (etcd, mysql\maria, etc)
+2. add multiple back-ends rather then just mongodb (etcd, mysql\maria, etc), also note in docs that maria is the recommended method (Maria multi-master write & all synced read slaves is perfect for Nebula flow)
 3. add volume\storage plugin usage for containers
 4. add network plugin usage for containers
 5. add memory and cpu limits for running containers
