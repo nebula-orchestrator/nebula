@@ -1,4 +1,5 @@
 # get api status
+a simple webpage that can be used to monitor the API is working
 ### request
 ```
 GET /api/status HTTP/1.1
@@ -17,6 +18,7 @@ success
 ```
 
 # create app
+create a new app inside the Nebula cluster
 ### request
 ```
 POST /api/apps/test HTTP/1.1
@@ -70,6 +72,7 @@ app already exists
 ```
 
 # delete app
+delete an app from the nebula cluster, be careful as the only way to restore a deleted app is manually creating it with the same veriables
 ### request
 ```
 DELETE /api/apps/test HTTP/1.1
@@ -96,6 +99,7 @@ when trying to delete a non existing app:
 ```
 
 # list apps
+list all apps managed in the current Nebula cluster
 ### request
 ```
 GET /api/apps HTTP/1.1
@@ -117,6 +121,7 @@ Postman-Token: 9ed33e7a-ade5-8512-2faf-e8697d855af8
 ```
 
 # get app config
+get a specific Nebula app config 
 ### request
 ```
 GET /api/apps/test HTTP/1.1
@@ -186,6 +191,7 @@ Postman-Token: 393100e2-fb29-3b02-fb66-b77388f810b1
 ```
 
 # start app
+start a Nebula app
 ### request
 ```
 POST /api/apps/test/start HTTP/1.1
@@ -221,6 +227,7 @@ Postman-Token: 8be83768-3921-f4cd-a6cb-b4fcda6b7e32
 ```
 
 # restart app
+note that restarting an app also force pulling the latest version of the docker container so can be used as a form of deployment method assuming that the you overwritten the container tag in your docker registry with a newer version
 ### request
 ```
 POST /api/apps/test/restart HTTP/1.1
@@ -256,6 +263,7 @@ Postman-Token: fa2e1e6f-c0c9-0dc5-a323-00ed9503cf4e
 ```
 
 # update app
+update a Nebula app config, currently all the permaters needs to be overwritten at once  (POST only), UPDATE support is on the todo list
 ### request
 ```
 POST /api/apps/test/update HTTP/1.1
