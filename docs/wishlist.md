@@ -23,3 +23,4 @@
 23. a web interface
 24. better file structure
 25. real logging
+26. multiple auth methods (AD/LDAP, OAuth, etc...)
