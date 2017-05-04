@@ -21,3 +21,5 @@
 21. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
 22. have the random wait time be on the app level rather then the cluster level & have the stop command be hardwired to have a wait time of 0
 23. a web interface
+24. better file structure
+25. real logging
