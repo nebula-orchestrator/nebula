@@ -24,3 +24,6 @@
 24. better file structure
 25. real logging
 26. multiple auth methods (AD/LDAP, OAuth, etc...)
+27. https://opencollective.com/ sponsorship & backers ecosystem?
+28. a real website rather then just the git repo
+29. move all the docs to readthedocs
