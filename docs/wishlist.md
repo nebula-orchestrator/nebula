@@ -27,3 +27,4 @@
 27. https://opencollective.com/ sponsorship & backers ecosystem?
 28. a real website rather then just the git repo
 29. move all the docs to readthedocs
+30. redo the wishlist to task list in the github builtin task board
