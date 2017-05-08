@@ -1,5 +1,7 @@
 ***Nebula***
 
+![example nebula architecture](https://github.com/nebula-orchestrator/nebula/blob/master/docs/cloudcraft%20-%20nebula.png "example nebula architecture")
+
 **Notices**
 1. This is an opensource project, see attached license for more details.
 2. The project is still rather young but that said it's already in use in a production enviroment at [vidazoo](https://www.vidazoo.com/) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) environment with great success.
