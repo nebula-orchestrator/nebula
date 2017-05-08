@@ -31,7 +31,7 @@ the following table shows the config variables used to set nebula:
 | registry_host               | REGISTRY_HOST               | worker-manager              | my_registry.example.com                                                                                              | string | the docker registry FQDN or IP                                                                                                                                                                                                       | yes      |
 | max_restart_wait_in_seconds | MAX_RESTART_WAIT_IN_SECONDS | worker-manager              | 5                                                                                                                    | int    | maximum time each worker server will wait before reloading the containers in case of restart\update (minimum time hard coded to 0 and each worker server will randomly choose between the that range to spread load on rabbit\mongo) | yes      |
 
-envvars take priority over variables set in the conf.json file in case both are set.
+envvars take priority over variables set in the conf.json file in case both are set, it's suggested to always wrap envvars values in Quotation marks but it's only required if the envvar uses special characters (for example "mongodb://mongo_user:mongo_pass@mongo_host:27017/?ssl=true&replicaSet=mongo_replica_set&authSource=mongo_auth_schema")
 
 the following table shows the path of each config file inside the docker containers:
 
