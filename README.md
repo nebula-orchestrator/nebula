@@ -9,6 +9,8 @@
 
 a API readme with examples,a basic diagram & comparision to popular orchestrators is available under the docs folder inside the [github](https://github.com/nebula-orchestrator/nebula) repo.
 
+**Description**
+
 this repo is designed to store all code for our custom built massive scale container management system, this is achieved by following the linux method of doing one thing only, each component is designed to be able to scale out for as far as needed, only downside over standard container orchestrator is that this loads the same containers on the server, so it can also be viewed\used like a great CI\CD for docker which allows deploying to thousands of servers simultaneously using a single API call.
 
 allows to:
@@ -24,6 +26,12 @@ there are 2 custom created services:
 2. worker manager - a container which listens to rabbit and manages the worker server it runs on, one has to run on each worker, fully stateless.
 
 as each worker server is in charge only of it's own containers all pulls from rabbit and work happens on the same time on all servers so pushing 50 million containers on a million servers will take the same amount of time as pushing 50 containers on 1 server.
+
+**Example use cases**
+
+1. apps with resource and\or traffic requirements so massive other orchestrators can't handle (thousands of servers and\or tens or even hundreds of millions of requests)
+2. managing apps that spans multiple regions and\or clouds from a single source with a single API call
+3. IOT\client deployments - a rather inventive use case which can allow you to deploy a new version to all of your clients (even if they range in the thousands) appliances with a single API call in minutes
 
 **Installing**
 
