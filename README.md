@@ -2,7 +2,7 @@
 
 **Notices**
 1. This is an opensource project, see attached license for more details.
-2. The project is still rather young but that said it's already in use in a production enviroment at [vidazoo](https://www.vidazoo.com/) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) with great success.
+2. The project is still rather young but that said it's already in use in a production enviroment at [vidazoo](https://www.vidazoo.com/) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) environment with great success.
 3. Help is very much welcomed.
 
 a API readme with examples,a basic diagram & comparision to popular orchestrators is available under the docs folder inside the [github](https://github.com/nebula-orchestrator/nebula) repo.
