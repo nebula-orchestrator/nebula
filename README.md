@@ -1,5 +1,10 @@
 ***Nebula***
 
+**Notices**
+1. This is an opensource project, see attached license for more details.
+2. The project is still rather young but that said it's already in use in a production enviroment at [vidazoo](https://www.vidazoo.com/) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) with great success.
+3. Help is very much welcomed.
+
 a API readme with examples,a basic diagram & comparision to popular orchestrators is available under the docs folder inside the [github](https://github.com/nebula-orchestrator/nebula) repo.
 
 this repo is designed to store all code for our custom built massive scale container management system, this is achieved by following the linux method of doing one thing only, each component is designed to be able to scale out for as far as needed, only downside over standard container orchestrator is that this loads the same containers on the server, so it can also be viewed\used like a great CI\CD for docker which allows deploying to thousands of servers simultaneously using a single API call.
