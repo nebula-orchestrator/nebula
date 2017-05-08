@@ -19,6 +19,7 @@ allows to:
 4. force pull updated containers
 5. change # of containers running per core
 6. change image used
+7. manage multiple apps over diffrent worker servers, each server "pod" of apps is determined by what APP_NAME envvar value comma seperated list you start the worker-manager container with, allowing you to mix and match for diffrent worker clusters while still managing all of them from the same api-manager containers.
 
 there are 2 custom created services:
 1. api manager - a REST API endpoint to control nebula, fully stateless (all data stored in DB only).
