@@ -17,13 +17,12 @@
 17. registry auth from the usual docker config file as well as from optionally from nebula config
 18. a CLI
 19. refactor to the newest version of docker-py (new syntax so require full refactor) - use the change to unuglify everything now that the design is proven to work.
-20. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
-21. have the random wait time be on the app level rather then the cluster level & have the stop command be hardwired to have a wait time of 0
-22. a web interface
-23. better file structure
-24. real logging
-25. multiple auth methods (AD/LDAP, OAuth, etc...)
-26. https://opencollective.com/ sponsorship & backers ecosystem?
-27. a real website rather then just the git repo
-28. move all the docs to readthedocs
-29. redo the wishlist to task list in the github builtin task board
+20. have the random wait time be on the app level rather then the cluster level & have the stop command be hardwired to have a wait time of 0
+21. a web interface
+22. better file structure
+23. real logging
+24. multiple auth methods (AD/LDAP, OAuth, etc...)
+25. https://opencollective.com/ sponsorship & backers ecosystem?
+26. a real website rather then just the git repo
+27. move all the docs to readthedocs
+28. redo the wishlist to task list in the github builtin task board
