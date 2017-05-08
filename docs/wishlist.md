@@ -16,15 +16,14 @@
 16. ability to PUT just a single part of an app while keeping the rest rather then having to POST everything from scratch
 17. registry auth from the usual docker config file as well as from optionally from nebula config
 18. a CLI
-19. running multiple apps per worker (get list of apps rather then just one), will also allow running the HAProxy\LB & so on using the usual nebula deployment model - current workaround is running multiple worker-managers each bound to a different app on the same server
-20. refactor to the newest version of docker-py (new syntax so require full refactor) - use the change to unuglify everything now that the design is proven to work.
-21. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
-22. have the random wait time be on the app level rather then the cluster level & have the stop command be hardwired to have a wait time of 0
-23. a web interface
-24. better file structure
-25. real logging
-26. multiple auth methods (AD/LDAP, OAuth, etc...)
-27. https://opencollective.com/ sponsorship & backers ecosystem?
-28. a real website rather then just the git repo
-29. move all the docs to readthedocs
-30. redo the wishlist to task list in the github builtin task board
+19. refactor to the newest version of docker-py (new syntax so require full refactor) - use the change to unuglify everything now that the design is proven to work.
+20. consolidate db_functions & rabbit_functions to a single source of truth (rather then 1 per api & 1 per worker currently used)
+21. have the random wait time be on the app level rather then the cluster level & have the stop command be hardwired to have a wait time of 0
+22. a web interface
+23. better file structure
+24. real logging
+25. multiple auth methods (AD/LDAP, OAuth, etc...)
+26. https://opencollective.com/ sponsorship & backers ecosystem?
+27. a real website rather then just the git repo
+28. move all the docs to readthedocs
+29. redo the wishlist to task list in the github builtin task board

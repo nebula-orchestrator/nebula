@@ -14,7 +14,7 @@ def get_conf_setting(setting, settings_json):
         return setting_value
     except:
         print "missing " + setting + " config setting"
-        exit(2)
+        os._exit(2)
 
 
 def split_container_name_version(image_name):
@@ -115,7 +115,7 @@ def rabbit_work_function(ch, method, properties, body):
         # if it's blank stop containers and kill worker-manger container
         if len(app_json) == 0:
             stop_containers(app_json)
-            exit(2)
+            os._exit(2)
         # elif it's stopped stop containers
         elif app_json["command"] == "stop":
             stop_containers(app_json)
@@ -129,7 +129,7 @@ def rabbit_work_function(ch, method, properties, body):
         rabbit_ack(ch, method)
     except pika.exceptions.ConnectionClosed:
         print "lost rabbitmq connection mid transfer - dropping container to be on the safe side"
-        exit(2)
+        os._exit(2)
 
 
 def rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name):
@@ -143,8 +143,26 @@ def rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_
             time.sleep(1)
         except pika.exceptions.ChannelClosed:
             print "queue no longer exists - can't guarantee order so dropping container"
-            exit(2)
+            os._exit(2)
         rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
+
+
+def app_theard(theard_app_name):
+    # connect to rabbit and create queue first thing at startup
+    rabbit_channel = rabbit_login()
+    rabbit_queue_name = str(theard_app_name) + "_" + randomword(10) + "_queue"
+    rabbit_queue = rabbit_create_queue(rabbit_queue_name, rabbit_channel)
+    rabbit_bind_queue(rabbit_queue_name, rabbit_channel, str(theard_app_name) + "_fanout")
+
+    # at startup connect to db, load newest app image and restart containers if configured to run
+    mongo_collection = mongo_connect_get_app_data_disconnect(mongo_url, theard_app_name, schema_name="nebula")
+    # check if app is set to running state
+    if mongo_collection["running"] is True:
+        # if answer is yes start it
+        roll_containers(mongo_collection)
+    # start processing rabbit queue
+    rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
+
 
 # read config file and config envvars at startup
 print "reading config variables"
@@ -162,7 +180,7 @@ schema_name = get_conf_setting("schema_name", auth_file)
 max_restart_wait_in_seconds = int(get_conf_setting("max_restart_wait_in_seconds", auth_file))
 
 # get the app name the worker manages
-app_name = os.environ["APP_NAME"]
+app_name_list = os.environ["APP_NAME"].split(",")
 
 # get number of cpu cores on host
 cpu_cores = get_number_of_cpu_cores()
@@ -170,18 +188,5 @@ cpu_cores = get_number_of_cpu_cores()
 # work against docker socket
 cli = Client(base_url='unix://var/run/docker.sock', version="auto")
 
-
-# connect to rabbit and create queue first thing at startup
-rabbit_channel = rabbit_login()
-rabbit_queue_name = str(app_name) + "_" + randomword(10) + "_queue"
-rabbit_queue = rabbit_create_queue(rabbit_queue_name, rabbit_channel)
-rabbit_bind_queue(rabbit_queue_name, rabbit_channel, str(app_name) + "_fanout")
-
-# at startup connect to db, load newest app image and restart containers if configured to run
-mongo_collection = mongo_connect_get_app_data_disconnect(mongo_url, app_name, schema_name="nebula")
-# check if app is set to running state
-if mongo_collection["running"] is True:
-    # if answer is yes start it
-    roll_containers(mongo_collection)
-# start processing rabbit queue
-rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
+for app_name in app_name_list:
+    Thread(target=app_theard, args=(app_name,)).start()
