@@ -12,14 +12,14 @@ def list_containers(app_name=""):
             return cli.containers(filters="")
         except:
             print "failed getting list of all containers"
-            os._exit(2)
+            os._exit(0)
     else:
         try:
             app_label = "app_name=" + app_name
             return cli.containers(filters={"label": app_label}, all=True)
         except:
             print "failed getting list of containers where label is app_name=" + app_name
-            os._exit(2)
+            os._exit(0)
 
 
 # pull image with optional version tag and registry auth
@@ -29,7 +29,7 @@ def pull_image(image_name, version_tag="latest", registry_user="", registry_pass
         print cli.login(registry_user, password=registry_pass, registry=registry_host)
     except:
         print "problem logging into registry"
-        os._exit(2)
+        os._exit(0)
     print "pulling " + image_name + ":" + str(version_tag)
     try:
         print image_name
@@ -37,7 +37,7 @@ def pull_image(image_name, version_tag="latest", registry_user="", registry_pass
             print(json.dumps(json.loads(line), indent=4))
     except:
         print "problem pulling " + image_name + ":" + str(version_tag)
-        os._exit(2)
+        os._exit(0)
 
 
 # create container
@@ -49,7 +49,7 @@ def create_container(app_name, container_name, image_name, host_configuration, c
         return container_created
     except:
         print "failed creating container " + container_name
-        os._exit(2)
+        os._exit(0)
 
 # stop container, default timeout set to 5 seconds, will try to kill if stop failed
 def stop_container(container_name, stop_timout=5):
@@ -61,7 +61,7 @@ def stop_container(container_name, stop_timout=5):
             return cli.kill(container_name, 0)
         except:
             print "problem stopping " + container_name
-            os._exit(2)
+            os._exit(0)
 
 
 # start container
@@ -71,7 +71,7 @@ def start_container(container_name):
         return cli.start(container_name)
     except:
         print "problem starting " + container_name
-        os._exit(2)
+        os._exit(0)
 
 
 # restart container, default timeout set to 5 seconds
@@ -81,7 +81,7 @@ def restart_container(container_name, stop_timout=2):
         return cli.restart(container_name, stop_timout)
     except:
         print "problem restarting " + container_name
-        os._exit(2)
+        os._exit(0)
 
 
 # remove container
@@ -94,7 +94,7 @@ def remove_container(container_name):
             return cli.remove_container(container_name, force=True)
         except:
             print "problem removing " + container_name
-            os._exit(2)
+            os._exit(0)
 
 
 # create host_config
@@ -103,7 +103,7 @@ def create_container_host_config(port_binds):
         return cli.create_host_config(port_bindings=port_binds, restart_policy={'Name': 'unless-stopped'})
     except:
         print "problem creating host config"
-        os._exit(2)
+        os._exit(0)
 
 
 # pull image, create hostconfig, create and start the container all in one simple function
