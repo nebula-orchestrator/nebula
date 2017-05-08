@@ -25,7 +25,11 @@ def list_containers(app_name=""):
 # pull image with optional version tag and registry auth
 def pull_image(image_name, version_tag="latest", registry_user="", registry_pass="", registry_host=""):
     print "logging in to registry"
-    print cli.login(registry_user, password=registry_pass, registry=registry_host)
+    try:
+        print cli.login(registry_user, password=registry_pass, registry=registry_host)
+    except:
+        print "problem logging into registry"
+        exit(2)
     print "pulling " + image_name + ":" + str(version_tag)
     try:
         print image_name
