@@ -61,7 +61,7 @@ def roll_containers(app_json):
 # stop app function
 def stop_containers(app_json):
     # list current containers
-    containers_list = list_containers(app_name)
+    containers_list = list_containers(app_json["app_name"])
     # stop running containers
     threads = []
     for container in containers_list:
@@ -77,7 +77,7 @@ def stop_containers(app_json):
 def start_containers(app_json, no_pull=False):
     # list current containers
     split_container_name_version(app_json["docker_image"])
-    containers_list = list_containers(app_name)
+    containers_list = list_containers(app_json["app_name"])
     if len(containers_list) > 0:
         print "app already running so restarting rather then starting containers"
         roll_containers(app_json)
@@ -96,7 +96,7 @@ def start_containers(app_json, no_pull=False):
             port_binds = dict()
             for x in app_json["starting_ports"]:
                 port_binds[x] = x + container_number
-            t = Thread(target=run_container, args=(app_name, app_name + str(container_number),
+            t = Thread(target=run_container, args=(app_json["app_name"], app_json["app_name"] + str(container_number),
                                                          image_name, port_binds,
                                                          app_json["starting_ports"], app_json["env_vars"], version_name,
                                                          registry_auth_user, registry_auth_password))
