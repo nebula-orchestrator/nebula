@@ -12,11 +12,4 @@ def get_number_of_cpu_cores():
     return cpu_number
 
 
-# return the amount of memory in mega the server has
-def get_memory_size():
-    try:
-        mem = virtual_memory().total / 1000 / 1000
-    except:
-        print "error getting the number of cpu core"
-        exit(2)
-    return mem
+
