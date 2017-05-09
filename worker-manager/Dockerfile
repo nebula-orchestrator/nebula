@@ -2,7 +2,7 @@
 FROM python:2.7.12-alpine
 
 # install docker-py and rabbitmq required packages
-RUN pip install docker-py pika pymongo[tls] psutil
+RUN pip install docker-py pika pymongo[tls] py-psutil
 
 # copy the codebase
 COPY . /worker-manager
