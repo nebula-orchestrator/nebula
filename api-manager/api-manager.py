@@ -98,6 +98,10 @@ def create_app(app_name):
         except:
             rabbit_close(rabbit_channel)
             return "{\"missing_parameters\": \"True\"}", 400
+        # check corner case of port being outside of possible port ranges
+        for starting_port in starting_ports:
+            if not 1 <= starting_port <= 65535:
+                return "{\"starting_ports\": \"invalid\"}", 400
         # update the db
         mongo_add_app(mongo_collection, app_name, starting_ports, containers_per_cpu, env_vars, docker_image, running)
         # create the rabbitmq exchange
