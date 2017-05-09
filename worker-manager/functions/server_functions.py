@@ -1,6 +1,4 @@
 import multiprocessing
-from psutil import virtual_memory
-
 
 # return numbers of cores
 def get_number_of_cpu_cores():
