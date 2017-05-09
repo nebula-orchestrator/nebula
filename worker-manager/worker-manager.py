@@ -185,7 +185,7 @@ app_name_list = os.environ["APP_NAME"].split(",")
 # get number of cpu cores on host
 cpu_cores = get_number_of_cpu_cores()
 
-# get size in mega of host memory
+# get size in mb of host memory
 memory = get_memory_size()
 
 # work against docker socket
