@@ -8,6 +8,3 @@ def get_number_of_cpu_cores():
         print "error getting the number of cpu core"
         exit(2)
     return cpu_number
-
-
-
