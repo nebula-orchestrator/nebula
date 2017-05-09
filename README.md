@@ -5,7 +5,8 @@
 1. This is an opensource project, see attached license for more details.
 2. The project is still rather young but that said it's already in use in a production enviroment at [vidazoo](https://www.vidazoo.com/) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) environment with great success.
 3. Help is very much welcomed.
-4. tested with CoreOS, Ubuntu server 14.04 & 16.04, CentOS 6 & 7, Amazon linux but really any Linux host that can run Docker should work.
+4. tested OS: CoreOS, Ubuntu server 14.04 & 16.04, CentOS 6 & 7, Amazon linux, expected to work with any Docker compatible Linux distro.
+5. tested Docker versions: 11.x up to 17.03.1-ce.
 
 a API readme with examples,a basic diagram & comparision to popular orchestrators is available under the docs folder inside the [github](https://github.com/nebula-orchestrator/nebula) repo.
 
