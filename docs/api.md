@@ -263,6 +263,42 @@ Postman-Token: fa2e1e6f-c0c9-0dc5-a323-00ed9503cf4e
 }
 ```
 
+# rolling restart app
+note that restarting an app also force pulling the latest version of the docker container so can be used as a form of deployment method assuming that the you overwritten the container tag in your docker registry with a newer version
+### request
+```
+POST /api/apps/test/roll HTTP/1.1
+Host: localhost:5000
+Authorization: Basic <your-token-here>
+Content-Type: application/json
+Cache-Control: no-cache
+Postman-Token: fa2e1e6f-c0c9-0dc5-a323-00ed9503cf4e
+```
+
+### response example
+```
+202
+{
+  "containers_per_cpu": 8,
+  "app_name": "test",
+  "env_vars": {
+    "test": "blabla123",
+    "test3t2t32": "tesg4ehgee"
+  },
+  "running": true,
+  "command": "roll",
+  "starting_ports": [
+    80,
+    443,
+    5555
+  ],
+  "_id": {
+    "$oid": "57ebd2ed28447e1e09e72d6a"
+  },
+  "docker_image": "registry.vidazoo.com:5000/httpd"
+}
+```
+
 # update app
 update a Nebula app config, currently all the permaters needs to be overwritten at once  (POST only), UPDATE support is on the todo list
 ### request

@@ -152,6 +152,26 @@ def restart_app(app_name):
     return dumps(app_json), 202
 
 
+# rolling restart an app
+@app.route('/api/apps/<app_name>/roll', methods=["POST"])
+def roll_app(app_name):
+    rabbit_channel = rabbit_login()
+    app_exists, app_json = mongo_get_app(mongo_collection, app_name)
+    # check app exists first
+    if app_exists is False:
+        rabbit_close(rabbit_channel)
+        return "{\"app_exists\": \"False\"}", 403
+    # check if app already running:
+    if app_json["running"] is False:
+        rabbit_close(rabbit_channel)
+        return "{\"running_before_restart\": \"False\"}", 403
+    # post to rabbit to restart app
+    app_json["command"] = "roll"
+    rabbit_send(rabbit_channel, app_name + "_fanout", dumps(app_json))
+    rabbit_close(rabbit_channel)
+    return dumps(app_json), 202
+
+
 # stop an app
 @app.route('/api/apps/<app_name>/stop', methods=["POST"])
 def stop_app(app_name):

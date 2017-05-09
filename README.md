@@ -16,7 +16,7 @@ this repo is designed to store all code for our custom built massive scale conta
 allows to:
 1. change ports
 2. change envvars
-3. stop\start\restart containers
+3. stop\start\restart\rolling restart containers
 4. force pull updated containers
 5. change # of containers running per core
 6. change image used

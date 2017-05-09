@@ -74,7 +74,7 @@ def start_container(container_name):
         os._exit(0)
 
 
-# restart container, default timeout set to 5 seconds
+# restart container, default timeout set to 2 seconds
 def restart_container(container_name, stop_timout=2):
     print "restarting " + container_name
     try:

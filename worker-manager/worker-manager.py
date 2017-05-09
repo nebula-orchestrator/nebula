@@ -44,7 +44,7 @@ def rabbit_login():
 
 
 # update\release\restart function
-def roll_containers(app_json):
+def restart_containers(app_json):
     image_registry_name, image_name, version_name = split_container_name_version(app_json["docker_image"])
     # wait between zero to max_restart_wait_in_seconds seconds before rolling - avoids overloading backend
     time.sleep(randint(0, max_restart_wait_in_seconds))
@@ -55,6 +55,23 @@ def roll_containers(app_json):
     stop_containers(app_json)
     # start new containers
     start_containers(app_json, no_pull=True)
+    return
+
+
+# stop app function
+def roll_containers(app_json):
+    image_registry_name, image_name, version_name = split_container_name_version(app_json["docker_image"])
+    # wait between zero to max_restart_wait_in_seconds seconds before rolling - avoids overloading backend
+    time.sleep(randint(0, max_restart_wait_in_seconds))
+    #pull image to speed up downtime between stop & start
+    pull_image(image_name, version_tag=version_name, registry_user=registry_auth_user,
+               registry_pass=registry_auth_password, registry_host=registry_host)
+    # stop running containers
+    # list current containers
+    containers_list = list_containers(app_json["app_name"])
+    # stop running containers
+    for container in containers_list:
+        restart_container(container["Id"])
     return
 
 
@@ -80,7 +97,7 @@ def start_containers(app_json, no_pull=False):
     containers_list = list_containers(app_json["app_name"])
     if len(containers_list) > 0:
         print "app already running so restarting rather then starting containers"
-        roll_containers(app_json)
+        restart_containers(app_json)
     else:
         # find out how many containers needed
         image_registry_name, image_name, version_name = split_container_name_version(app_json["docker_image"])
@@ -122,9 +139,12 @@ def rabbit_work_function(ch, method, properties, body):
         # if it's start start containers
         elif app_json["command"] == "start":
             start_containers(app_json)
+        # if it's roll rolling restart containers
+        elif app_json["command"] == "roll":
+            roll_containers(app_json)
         # elif restart containers
         else:
-            roll_containers(app_json)
+            restart_containers(app_json)
         # ack message
         rabbit_ack(ch, method)
     except pika.exceptions.ConnectionClosed:
@@ -159,7 +179,7 @@ def app_theard(theard_app_name):
     # check if app is set to running state
     if mongo_collection["running"] is True:
         # if answer is yes start it
-        roll_containers(mongo_collection)
+        restart_containers(mongo_collection)
     # start processing rabbit queue
     rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
 
