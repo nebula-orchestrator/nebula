@@ -1,5 +1,6 @@
 ***Nebula***
 ![example nebula architecture](https://github.com/nebula-orchestrator/nebula/blob/master/docs/cloudcraft%20-%20nebula.png "example nebula architecture")
+
 ![example nebula architecture](https://github.com/nebula-orchestrator/nebula/blob/master/docs/nebula.png "example nebula architecture")
 
 **Notices**
