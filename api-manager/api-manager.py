@@ -204,6 +204,10 @@ def update_app(app_name):
     except:
         rabbit_close(rabbit_channel)
         return "{\"missing_parameters\": \"True\"}", 400
+    # check corner case of port being outside of possible port ranges
+    for starting_port in starting_ports:
+        if not 1 <= starting_port <= 65535:
+            return "{\"starting_ports\": \"invalid\"}", 400
     # update db
     app_json = mongo_update_app(mongo_collection, app_name, starting_ports, containers_per_cpu, env_vars, docker_image, running)
     # post to rabbit to update app

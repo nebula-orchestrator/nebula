@@ -5,7 +5,7 @@ FROM python:2.7.12-alpine
 RUN pip install docker-py pika pymongo[tls]
 
 # install psutil
-run APK add --no-cache py-psutil
+RUN apk add --no-cache py-psutil
 
 # copy the codebase
 COPY . /worker-manager
