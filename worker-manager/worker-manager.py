@@ -132,6 +132,7 @@ def rabbit_work_function(ch, method, properties, body):
         # if it's blank stop containers and kill worker-manger container
         if len(app_json) == 0:
             stop_containers(app_json)
+            print "got a blank massage from rabbit - likely app wasn't created in nebula API yet, dropping container"
             os._exit(2)
         # elif it's stopped stop containers
         elif app_json["command"] == "stop":
