@@ -1,5 +1,5 @@
 from docker import Client
-import json, os, time, socket
+import json, os, time
 
 # work against docker socket
 cli = Client(base_url='unix://var/run/docker.sock', version="auto")
