@@ -66,12 +66,12 @@ def roll_containers(app_json):
     #pull image to speed up downtime between stop & start
     pull_image(image_name, version_tag=version_name, registry_user=registry_auth_user,
                registry_pass=registry_auth_password, registry_host=registry_host)
-    # stop running containers
     # list current containers
     containers_list = list_containers(app_json["app_name"])
-    # stop running containers
+    # roll running containers
     for container in containers_list:
         restart_container(container["Id"])
+        time.sleep(5)
     return
 
 
