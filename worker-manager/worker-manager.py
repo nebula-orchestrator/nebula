@@ -38,7 +38,7 @@ def randomword(length):
 
 # login to rabbit function
 def rabbit_login():
-    rabbit_connection = rabbit_connect(rabbit_user, rabbit_password, rabbit_host, rabbit_port, rabbit_vhost)
+    rabbit_connection = rabbit_connect(rabbit_user, rabbit_password, rabbit_host, rabbit_port, rabbit_vhost, rabbit_heartbeat)
     rabbit_connection_channel = rabbit_create_channel(rabbit_connection)
     return rabbit_connection_channel
 
@@ -207,6 +207,7 @@ rabbit_password = get_conf_setting("rabbit_password", auth_file)
 mongo_url = get_conf_setting("mongo_url", auth_file)
 schema_name = get_conf_setting("schema_name", auth_file)
 max_restart_wait_in_seconds = int(get_conf_setting("max_restart_wait_in_seconds", auth_file))
+rabbit_heartbeat = int(get_conf_setting("rabbit_heartbeat", auth_file))
 
 # get the app name the worker manages
 app_name_list = os.environ["APP_NAME"].split(",")

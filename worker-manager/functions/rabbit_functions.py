@@ -2,9 +2,9 @@ import pika
 
 
 # connect to rabbit function
-def rabbit_connect(rabbit_user, rabbit_pass, rabbit_host, rabbit_port, rabbit_virtual_host):
+def rabbit_connect(rabbit_user, rabbit_pass, rabbit_host, rabbit_port, rabbit_virtual_host, rabbit_heartbeat):
     credentials = pika.PlainCredentials(rabbit_user, rabbit_pass)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(rabbit_host, rabbit_port, rabbit_virtual_host, credentials, heartbeat_interval=3600))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(rabbit_host, rabbit_port, rabbit_virtual_host, credentials, heartbeat_interval=rabbit_heartbeat))
     return connection
 
 

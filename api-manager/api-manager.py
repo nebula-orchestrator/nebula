@@ -17,7 +17,7 @@ def get_conf_setting(setting, settings_json):
 
 # login to rabbit function
 def rabbit_login():
-    rabbit_connection = rabbit_connect(rabbit_user, rabbit_password, rabbit_host, rabbit_port, rabbit_vhost)
+    rabbit_connection = rabbit_connect(rabbit_user, rabbit_password, rabbit_host, rabbit_port, rabbit_vhost, rabbit_heartbeat)
     rabbit_connection_channel = rabbit_create_channel(rabbit_connection)
     return rabbit_connection_channel
 
@@ -35,6 +35,7 @@ rabbit_user = get_conf_setting("rabbit_user", auth_file)
 rabbit_password = get_conf_setting("rabbit_password", auth_file)
 mongo_url = get_conf_setting("mongo_url", auth_file)
 schema_name = get_conf_setting("schema_name", auth_file)
+rabbit_heartbeat = int(get_conf_setting("rabbit_heartbeat", auth_file))
 
 
 # login to db at startup
