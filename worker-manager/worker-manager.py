@@ -54,7 +54,7 @@ def restart_containers(app_json, registry_auth_user="", registry_auth_password="
     # stop running containers
     stop_containers(app_json)
     # start new containers
-    start_containers(app_json, False ,registry_auth_user, registry_auth_password, registry_host)
+    start_containers(app_json, True, registry_auth_user, registry_auth_password, registry_host)
     return
 
 
@@ -170,10 +170,14 @@ def rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_
 
 def app_theard(theard_app_name):
     # connect to rabbit and create queue first thing at startup
-    rabbit_channel = rabbit_login()
-    rabbit_queue_name = str(theard_app_name) + "_" + randomword(10) + "_queue"
-    rabbit_queue = rabbit_create_queue(rabbit_queue_name, rabbit_channel)
-    rabbit_bind_queue(rabbit_queue_name, rabbit_channel, str(theard_app_name) + "_fanout")
+    try:
+        rabbit_channel = rabbit_login()
+        rabbit_queue_name = str(theard_app_name) + "_" + randomword(10) + "_queue"
+        rabbit_queue = rabbit_create_queue(rabbit_queue_name, rabbit_channel)
+        rabbit_bind_queue(rabbit_queue_name, rabbit_channel, str(theard_app_name) + "_fanout")
+    except:
+        print "failed first rabbit connection, dropping container to be on the safe side"
+        os._exit(2)
 
     # at startup connect to db, load newest app image and restart containers if configured to run
     mongo_collection = mongo_connect_get_app_data_disconnect(mongo_url, theard_app_name, schema_name="nebula")
@@ -182,7 +186,11 @@ def app_theard(theard_app_name):
         # if answer is yes start it
         restart_containers(mongo_collection, registry_auth_user,registry_auth_password, registry_host)
     # start processing rabbit queue
-    rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
+    try:
+        rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
+    except:
+        print "rabbit connection failure - can't guarantee order so dropping container"
+        os._exit(2)
 
 
 # read config file and config envvars at startup
