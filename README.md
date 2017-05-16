@@ -4,7 +4,7 @@
 1. This is an opensource project, see attached license for more details.
 2. The project is still rather young but that said it's already in use in a production enviroment at [vidazoo](https://www.vidazoo.com/) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) environment with great success.
 3. Help is very much welcomed.
-4. tested OS: CoreOS, Ubuntu server 14.04 & 16.04, CentOS 6 & 7, Amazon linux, expected to work with any Docker compatible Linux distro.
+4. tested OS: CoreOS, RancherOS, Ubuntu server 14.04 & 16.04, CentOS 6 & 7, Amazon linux, expected to work with any Docker compatible Linux distro.
 5. tested Docker versions: 11.x up to 17.03.1-ce.
 
 a API readme with examples,a basic diagram & comparision to popular orchestrators is available under the docs folder inside the [github](https://github.com/nebula-orchestrator/nebula) repo.
@@ -20,7 +20,7 @@ allows to:
 4. force pull updated containers
 5. change # of containers running per core
 6. change image used
-7. manage multiple apps over diffrent worker servers, each server "pod" of apps is determined by what APP_NAME envvar value comma seperated list you start the worker-manager container with, allowing you to mix and match for diffrent worker clusters while still managing all of them from the same api-manager containers.
+7. manage multiple apps over different worker servers, each server "pod" of apps is determined by what APP_NAME envvar value comma seperated list you start the worker-manager container with, allowing you to mix and match for diffrent worker clusters while still managing all of them from the same api-manager containers.
 
 there are 2 custom created services:
 1. api manager - a REST API endpoint to control nebula, fully stateless (all data stored in DB only).
@@ -33,6 +33,7 @@ as each worker server is in charge only of it's own containers all pulls from ra
 1. apps with resource and\or traffic requirements so massive other orchestrators can't handle (thousands of servers and\or tens or even hundreds of millions of requests)
 2. managing apps that spans multiple regions and\or clouds from a single source with a single API call
 3. IOT\client deployments - a rather inventive use case which can allow you to deploy a new version to all of your clients (even if they range in the thousands) appliances with a single API call in minutes
+4. SAAS providers - if you have a cluster per client (as you provide them with managed "private" instances) or such Nebula allows you to push new versions all your clients managed instances at once
 
 **Installing**
 
@@ -40,7 +41,7 @@ the basic steps to getting Nebula to work is:
 1. create mongo, preferably a cluster & even a sharded cluster for large enough cluster
 2. create RabbitMQ, preferably a cluster with HA queues between them or even federated nodes for a large enough cluster
 3. create your copy of the api-manger docker image, a base image is available at [docker-hub](https://hub.docker.com/r/nebulaorchestrator/nebula/) with the "api-manager" tag (example: `docker pull nebulaorchestrator/nebula:api-manager`), either use it as a baseline FROM to create your own image or mount your own config file to replace the default one
-4. create api servers and have them run the api-manager container, make sure to open the api-monitor ports on everything along the way & it's recommended having the restart=always flag set, preferably 2 at least load balanced between them for example:
+4. create api servers and have them run the api-manager container, make sure to open the api-manager ports on everything along the way & it's recommended having the restart=always flag set, preferably 2 at least load balanced between them for example:
  `/usr/bin/docker run -d -p 80:80 --restart=always --name nebula-api-manager <your_api_manager_container>`
 5. create your copy of the worker-manger docker image, a base image is available at docker hub at [docker-hub](https://hub.docker.com/r/nebulaorchestrator/nebula/) with the "worker-manager" tag (example: `docker pull nebulaorchestrator/nebula:worker-manager`), either use it as a baseline FROM to create your own image or mount your own config file to replace the default one
 6. create the worker servers and have them run the worker-manager container, make sure to bind the docker socket & having the restart=always flag set is mandatory as nebula worker-manager relies on containers restarts to reconnect to rabbit in case of long durations of it being unable to connect to rabbit in order to ensure latest app config is set correctly, the container needs to run with an APP_NAME envvvar:

@@ -101,12 +101,21 @@ def start_containers(app_json, no_pull=False, registry_auth_user="", registry_au
         threads = []
         while container_number <= containers_needed:
             port_binds = dict()
+            port_list = []
             for x in app_json["starting_ports"]:
-                port_binds[x] = x + container_number
+                if isinstance(x, int):
+                    port_binds[x] = x + container_number - 1
+                    port_list.append(x)
+                elif isinstance(x, dict):
+                    for host_port, container_port in x.iteritems():
+                        port_binds[int(container_port)] = int(host_port) + container_number - 1
+                        port_list.append(container_port)
+                else:
+                    print "starting ports can only a list containing intgers or dicts - dropping worker-manager"
+                    os._exit(2)
             t = Thread(target=run_container, args=(app_json["app_name"], app_json["app_name"] + str(container_number),
-                                                         image_name, port_binds,
-                                                         app_json["starting_ports"], app_json["env_vars"], version_name,
-                                                         registry_auth_user, registry_auth_password))
+                                                   image_name, port_binds, port_list, app_json["env_vars"],
+                                                   version_name, registry_auth_user, registry_auth_password))
             threads.append(t)
             t.start()
             #run_container(app_name, app_name + str(container_number), app_json["docker_image"],port_binds,app_json["starting_ports"], app_json["env_vars"], version_tag="latest", docker_registry_user=registry_auth_user,docker_registry_pass=registry_auth_password)

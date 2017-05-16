@@ -101,8 +101,16 @@ def create_app(app_name):
             return "{\"missing_parameters\": \"True\"}", 400
         # check corner case of port being outside of possible port ranges
         for starting_port in starting_ports:
-            if not 1 <= starting_port <= 65535:
-                return "{\"starting_ports\": \"invalid\"}", 400
+            if isinstance(starting_port, int):
+                if not 1 <= starting_port <= 65535:
+                    return "{\"starting_ports\": \"invalid port\"}", 400
+            elif isinstance(starting_port, dict):
+                for host_port, container_port in starting_port.iteritems():
+                    if not 1 <= int(host_port) <= 65535 or not 1 <= int(container_port) <= 65535:
+                        return "{\"starting_ports\": \"invalid port\"}", 400
+            else:
+                rabbit_close(rabbit_channel)
+                return "{\"starting_ports\": \"can only be a list containing intgers or dicts\"}", 403
         # update the db
         mongo_add_app(mongo_collection, app_name, starting_ports, containers_per_cpu, env_vars, docker_image, running)
         # create the rabbitmq exchange
@@ -231,8 +239,16 @@ def update_app(app_name):
         return "{\"missing_parameters\": \"True\"}", 400
     # check corner case of port being outside of possible port ranges
     for starting_port in starting_ports:
-        if not 1 <= starting_port <= 65535:
-            return "{\"starting_ports\": \"invalid\"}", 400
+        if isinstance(starting_port, int):
+            if not 1 <= starting_port <= 65535:
+                return "{\"starting_ports\": \"invalid port\"}", 400
+        elif isinstance(starting_port, dict):
+            for host_port, container_port in starting_port.iteritems():
+                if not 1 <= int(host_port) <= 65535 or not 1 <= int(container_port) <= 65535:
+                    return "{\"starting_ports\": \"invalid port\"}", 400
+        else:
+            rabbit_close(rabbit_channel)
+            return "{\"starting_ports\": \"can only be a list containing intgers or dicts\"}", 403
     # update db
     app_json = mongo_update_app(mongo_collection, app_name, starting_ports, containers_per_cpu, env_vars, docker_image, running)
     # post to rabbit to update app
