@@ -30,18 +30,18 @@ def mongo_check_app_exists(collection, app_name):
 
 
 # update all app data
-def mongo_update_app(collection, app_name, starting_ports, containers_per_cpu, env_vars, docker_image, running):
+def mongo_update_app(collection, app_name, starting_ports, containers_per, env_vars, docker_image, running):
     app_doc = {
         "app_name": app_name,
         "starting_ports": starting_ports,
-        "containers_per_cpu": containers_per_cpu,
+        "containers_per": containers_per,
         "env_vars": env_vars,
         "docker_image": docker_image,
         "running": running
     }
     result = collection.find_one_and_update({'app_name': app_name},
                                             {'$set': {'starting_ports': starting_ports,
-                                                      'containers_per_cpu': containers_per_cpu,
+                                                      'containers_per': containers_per,
                                                       'env_vars': env_vars,
                                                       'docker_image': docker_image,
                                                       'running': running}},
@@ -65,15 +65,15 @@ def mongo_update_app_envars(collection, app_name, env_vars):
 
 
 # get number of containers per cpu of app
-def mongo_list_app_containers_per_cpu(collection, app_name):
+def mongo_list_app_containers_per(collection, app_name):
     result = collection.find_one({"app_name": app_name})
-    return result["containers_per_cpu"]
+    return result["containers_per"]
 
 
 # update number of containers per cpu of app
-def mongo_update_app_containers_per_cpu(collection, app_name, containers_per_cpu):
+def mongo_update_app_containers_per(collection, app_name, containers_per):
     result = collection.find_one_and_update({'app_name': app_name},
-                                            {'$set': {'containers_per_cpu': containers_per_cpu}},
+                                            {'$set': {'containers_per': containers_per}},
                                             return_document=ReturnDocument.AFTER)
     return result
 
@@ -87,11 +87,11 @@ def mongo_list_apps(collection):
 
 
 # add app
-def mongo_add_app(collection, app_name, starting_ports, containers_per_cpu, env_vars, docker_image, running=True):
+def mongo_add_app(collection, app_name, starting_ports, containers_per, env_vars, docker_image, running=True):
     app_doc = {
         "app_name": app_name,
         "starting_ports": starting_ports,
-        "containers_per_cpu": containers_per_cpu,
+        "containers_per": containers_per,
         "env_vars": env_vars,
         "docker_image": docker_image,
         "running": running

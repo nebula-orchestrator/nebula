@@ -91,7 +91,11 @@ def start_containers(app_json, no_pull=False, registry_auth_user="", registry_au
     else:
         # find out how many containers needed
         image_registry_name, image_name, version_name = split_container_name_version(app_json["docker_image"])
-        containers_needed = cpu_cores * app_json["containers_per_cpu"]
+        for scale_type, scale_amount in app_json["containers_per"].iteritems():
+            if scale_type == "cpu":
+                containers_needed = int(cpu_cores * scale_amount)
+            elif scale_type == "server" or scale_type == "instance":
+                containers_needed = int(scale_amount)
         #pull latest image
         if no_pull is False:
             pull_image(image_name, version_tag=version_name, registry_user=registry_auth_user,
