@@ -34,7 +34,7 @@ def split_container_name_version(image_name):
 
 
 def randomword():
-    return str(uuid.uuid4()).replace('-','')
+    return str(uuid.uuid4()).replace('-', '')
 
 
 # login to rabbit function
