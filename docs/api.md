@@ -33,7 +33,8 @@ Postman-Token: 1c4b215b-7bb4-8045-4896-9c4d3ac3c2de
     "containers_per_cpu": 5,
     "env_vars": {"test": "test123"},
     "docker_image" : "registry.vidazoo.com:5000/nginx",
-    "running": true
+    "running": true,
+    "network_mode": "bridge"
 }
 ```
 
@@ -317,7 +318,8 @@ Postman-Token: 9cd8b55e-2512-07fc-9cf1-15fc5c562635
     "containers_per_cpu": 8,
     "env_vars": {"test": "blabla123", "test3t2t32": "tesg4ehgee"},
     "docker_image" : "registry.vidazoo.com:5000/httpd",
-    "running": true
+    "running": true,
+    "network_mode": "bridge"
 }
 ```
 
