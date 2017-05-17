@@ -17,7 +17,8 @@ def get_conf_setting(setting, settings_json):
 
 # login to rabbit function
 def rabbit_login():
-    rabbit_connection = rabbit_connect(rabbit_user, rabbit_password, rabbit_host, rabbit_port, rabbit_vhost, rabbit_heartbeat)
+    rabbit_connection = rabbit_connect(rabbit_user, rabbit_password, rabbit_host, rabbit_port, rabbit_vhost,
+                                       rabbit_heartbeat)
     rabbit_connection_channel = rabbit_create_channel(rabbit_connection)
     return rabbit_connection_channel
 
@@ -113,7 +114,8 @@ def create_app(app_name):
                 rabbit_close(rabbit_channel)
                 return "{\"starting_ports\": \"can only be a list containing intgers or dicts\"}", 403
         # update the db
-        mongo_add_app(mongo_collection, app_name, starting_ports, containers_per, env_vars, docker_image, running, network_mode)
+        mongo_add_app(mongo_collection, app_name, starting_ports, containers_per, env_vars, docker_image, running,
+                      network_mode)
         # create the rabbitmq exchange
         rabbit_create_exchange(rabbit_channel, app_name + "_fanout")
         # post the new app to rabbitmq if app is set to start running
@@ -252,7 +254,8 @@ def update_app(app_name):
             rabbit_close(rabbit_channel)
             return "{\"starting_ports\": \"can only be a list containing intgers or dicts\"}", 403
     # update db
-    app_json = mongo_update_app(mongo_collection, app_name, starting_ports, containers_per, env_vars, docker_image, running, network_mode)
+    app_json = mongo_update_app(mongo_collection, app_name, starting_ports, containers_per, env_vars, docker_image,
+                                running, network_mode)
     # post to rabbit to update app
     app_json["command"] = "update"
     rabbit_send(rabbit_channel, app_name + "_fanout", dumps(app_json))
