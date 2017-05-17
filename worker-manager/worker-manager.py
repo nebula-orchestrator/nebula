@@ -1,4 +1,4 @@
-import json, os, time, random, string
+import json, os, time, random, string, uuid
 from functions.db_functions import *
 from functions.rabbit_functions import *
 from functions.docker_functions import *
@@ -32,8 +32,9 @@ def split_container_name_version(image_name):
         pass
     return image_registry_name, image_name, version_name
 
-def randomword(length):
-    return ''.join(random.choice(string.lowercase) for i in range(length))
+
+def randomword():
+    return str(uuid.uuid4()).replace('-','')
 
 
 # login to rabbit function
@@ -176,7 +177,7 @@ def app_theard(theard_app_name):
     # connect to rabbit and create queue first thing at startup
     try:
         rabbit_channel = rabbit_login()
-        rabbit_queue_name = str(theard_app_name) + "_" + randomword(10) + "_queue"
+        rabbit_queue_name = str(theard_app_name) + "_" + randomword() + "_queue"
         rabbit_queue = rabbit_create_queue(rabbit_queue_name, rabbit_channel)
         rabbit_bind_queue(rabbit_queue_name, rabbit_channel, str(theard_app_name) + "_fanout")
     except:
