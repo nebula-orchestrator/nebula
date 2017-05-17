@@ -30,7 +30,8 @@ def mongo_check_app_exists(collection, app_name):
 
 
 # update all app data
-def mongo_update_app(collection, app_name, starting_ports, containers_per, env_vars, docker_image, running, network_mode):
+def mongo_update_app(collection, app_name, starting_ports, containers_per, env_vars, docker_image, running,
+                     network_mode):
     app_doc = {
         "app_name": app_name,
         "starting_ports": starting_ports,
@@ -89,7 +90,8 @@ def mongo_list_apps(collection):
 
 
 # add app
-def mongo_add_app(collection, app_name, starting_ports, containers_per, env_vars, docker_image, running=True, network_mode="bridge"):
+def mongo_add_app(collection, app_name, starting_ports, containers_per, env_vars, docker_image, running=True,
+                  network_mode="bridge"):
     app_doc = {
         "app_name": app_name,
         "starting_ports": starting_ports,
