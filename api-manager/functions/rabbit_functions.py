@@ -48,7 +48,7 @@ def rabbit_ack(rabbit_ack_channel, rabbit_ack_method):
 
 # create queue
 def rabbit_create_queue(rabbit_queue_name, rabbit_channel):
-    created_queue = rabbit_channel.queue_declare(queue=rabbit_queue_name, arguments={"x-expires": 60000})
+    created_queue = rabbit_channel.queue_declare(queue=rabbit_queue_name, arguments={"x-expires": 180000})
     return created_queue
 
 
