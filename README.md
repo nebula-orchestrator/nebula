@@ -2,7 +2,7 @@
 
 **Notices**
 1. This is an opensource project, see attached license for more details.
-2. The project is still rather young but that said it's already in use in a production enviroment at [vidazoo](https://www.vidazoo.com/) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) environment with great success.
+2. The project is still rather young but that said it's already in use in a production environment at [vidazoo](https://www.vidazoo.com/) (Nebula was orginally developed as an internal tool for vidazoo) for about a year in a multi cloud, multi region, high traffic (10 million+ requests/minute) environment with great success.
 3. Help is very much welcomed.
 4. tested OS: CoreOS, RancherOS, Ubuntu server 14.04 & 16.04, CentOS 6 & 7, Amazon linux, expected to work with any Docker compatible Linux distro.
 5. tested Docker versions: 11.x up to 17.03.1-ce.
