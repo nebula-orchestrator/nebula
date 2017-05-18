@@ -4,7 +4,8 @@ import pika
 # connect to rabbit function
 def rabbit_connect(rabbit_user, rabbit_pass, rabbit_host, rabbit_port, rabbit_virtual_host, rabbit_heartbeat):
     credentials = pika.PlainCredentials(rabbit_user, rabbit_pass)
-    connection = pika.BlockingConnection(pika.ConnectionParameters(rabbit_host, rabbit_port, rabbit_virtual_host, credentials, heartbeat_interval=rabbit_heartbeat))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(rabbit_host, rabbit_port, rabbit_virtual_host,
+                                                                   credentials, heartbeat_interval=rabbit_heartbeat))
     return connection
 
 
@@ -47,7 +48,7 @@ def rabbit_ack(rabbit_ack_channel, rabbit_ack_method):
 
 # create queue
 def rabbit_create_queue(rabbit_queue_name, rabbit_channel):
-    created_queue = rabbit_channel.queue_declare(queue=rabbit_queue_name, arguments={"x-expires": 300000})
+    created_queue = rabbit_channel.queue_declare(queue=rabbit_queue_name, arguments={"x-expires": 60000})
     return created_queue
 
 
