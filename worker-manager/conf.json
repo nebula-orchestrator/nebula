@@ -9,6 +9,6 @@
   "rabbit_password": "nebula_rabbit_password",
   "mongo_url": "mongodb://<mongo_user>:<mongo_password>@<nebula_mongo_host>:27017/<mongo_schema>?ssl=true&replicaSet=<mongo_replica_set>&authSource=<mongo_auth_schema>",
   "schema_name": "mongo_schema_name",
-  "max_restart_wait_in_seconds": 180,
+  "max_restart_wait_in_seconds": 10,
   "rabbit_heartbeat": 3600
 }
