@@ -144,13 +144,13 @@ def rabbit_work_function(ch, method, properties, body):
             stop_containers(app_json)
         # if it's start start containers
         elif app_json["command"] == "start":
-            start_containers(app_json, False, registry_auth_user,registry_auth_password, registry_host)
+            start_containers(app_json, False, registry_auth_user, registry_auth_password, registry_host)
         # if it's roll rolling restart containers
         elif app_json["command"] == "roll":
-            roll_containers(app_json, registry_auth_user,registry_auth_password, registry_host)
+            roll_containers(app_json, registry_auth_user, registry_auth_password, registry_host)
         # elif restart containers
         else:
-            restart_containers(app_json, registry_auth_user,registry_auth_password, registry_host)
+            restart_containers(app_json, registry_auth_user, registry_auth_password, registry_host)
         # ack message
         rabbit_ack(ch, method)
     except pika.exceptions.ConnectionClosed:
@@ -189,7 +189,7 @@ def app_theard(theard_app_name):
     # check if app is set to running state
     if mongo_collection["running"] is True:
         # if answer is yes start it
-        restart_containers(mongo_collection, registry_auth_user,registry_auth_password, registry_host)
+        restart_containers(mongo_collection, registry_auth_user, registry_auth_password, registry_host)
     # start processing rabbit queue
     try:
         rabbit_recursive_connect(rabbit_channel, rabbit_work_function, rabbit_queue_name)
