@@ -24,7 +24,7 @@ def rabbit_login():
 
 
 # read config file at startup
-#load the login params from auth.json file
+# load the login params from auth.json file or envvar
 print "reading conf.json file"
 auth_file = json.load(open("conf.json"))
 basic_auth_user = get_conf_setting("basic_auth_user", auth_file)
@@ -72,6 +72,7 @@ app.config['BASIC_AUTH_FORCE'] = True
 app.config['BASIC_AUTH_REALM'] = 'nebula'
 basic_auth = BasicAuth(app)
 print "basic auth configured"
+
 
 # api check page - return 200 and a massage just so we know API is reachable
 @app.route('/api/status', methods=["GET"])
