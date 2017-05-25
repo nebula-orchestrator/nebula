@@ -21,7 +21,7 @@
 21. multiple auth methods (AD/LDAP, OAuth, etc...)
 22. https://opencollective.com/ sponsorship & backers ecosystem?
 23. a real website rather then just the git repo
-24. move all the docs to mkdocs with readthedocs theme and store in it's own repo and git page
+24. move all the docs to mkdocs with readthedocs theme and store in it's own repo and on readthedocs.io
 25. redo the wishlist to task list in the github builtin task board
 26. finish rolling restart module
 27. add mount folders\files support
