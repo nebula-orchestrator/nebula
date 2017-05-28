@@ -1,6 +1,6 @@
 ***Nebula***
 
-project was split to multiple repos, please consulate the following repos for the lastest version & documentation as this repo has been deprecated:
+project was split to multiple repos, please consulate the following repos for the latest version & documentation as this repo has been deprecated:
 
 1. [docs](https://github.com/nebula-orchestrator/docs)
 2. [api-manager](https://github.com/nebula-orchestrator/api-manager)
