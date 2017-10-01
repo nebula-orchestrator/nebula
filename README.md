@@ -1,6 +1,6 @@
-**project has moved repos**
+# roject has moved repos
 
-**do not use this repo - use those listed below as they have newer code & lot of new features and bugfixed**
+## do not use this repo - use those listed below as they have newer code & lot of new features and bugfixed
 
 ***Nebula***
 
